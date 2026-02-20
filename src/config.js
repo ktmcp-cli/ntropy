@@ -1,7 +1,13 @@
 import Conf from 'conf';
 
-const conf = new Conf({ projectName: 'ktmcp-ntropy' });
+const config = new Conf({
+  projectName: 'ntropy-cli',
+  schema: { apiKey: { type: 'string', default: '' } }
+});
 
-export function getConfig(key) { return conf.get(key); }
-export function setConfig(key, value) { conf.set(key, value); }
-export function isConfigured() { return !!conf.get('apiKey'); }
+export function getConfig(key) { return config.get(key); }
+export function setConfig(key, value) { config.set(key, value); }
+export function getAllConfig() { return config.store; }
+export function clearConfig() { config.clear(); }
+export function isConfigured() { return !!config.get('apiKey'); }
+export default config;

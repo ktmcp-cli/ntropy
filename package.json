@@ -1,18 +1,19 @@
 {
   "name": "@ktmcp-cli/ntropy",
   "version": "1.0.0",
-  "description": "Production-ready CLI for Ntropy financial transaction enrichment API",
+  "description": "Production-ready CLI for Ntropy Transaction API v1 - transaction classification, merchant enrichment",
   "type": "module",
   "main": "src/index.js",
   "bin": {
     "ntropy": "bin/ntropy.js"
   },
-  "keywords": ["ntropy", "cli", "api", "ktmcp", "fintech", "transactions"],
+  "keywords": ["ntropy","transactions","classification","merchant","cli","api","ktmcp"],
   "author": "KTMCP",
   "license": "MIT",
   "dependencies": {
     "commander": "^12.0.0",
     "axios": "^1.6.7",
+    "dotenv": "^16.4.1",
     "chalk": "^5.3.0",
     "ora": "^8.0.1",
     "conf": "^12.0.0"
@@ -24,5 +25,8 @@
     "type": "git",
     "url": "git+https://github.com/ktmcp-cli/ntropy.git"
   },
-  "homepage": "https://killthemcp.com/ntropy-cli"
+  "homepage": "https://killthemcp.com/ntropy-cli",
+  "bugs": {
+    "url": "https://github.com/ktmcp-cli/ntropy/issues"
+  }
 }

@@ -1,15 +1,33 @@
-![Banner](https://raw.githubusercontent.com/ktmcp-cli/ntropy/main/banner.svg)
-
 > "Six months ago, everyone was talking about MCPs. And I was like, screw MCPs. Every MCP would be better as a CLI."
 >
-> — [Peter Steinberger](https://twitter.com/steipete), Founder of OpenClaw
+> — [Peter Steinberger](https://twitter.com/steipete), Founder of OpenClaw  
 > [Watch on YouTube (~2:39:00)](https://www.youtube.com/@lexfridman) | [Lex Fridman Podcast #491](https://lexfridman.com/peter-steinberger/)
 
-# Ntropy CLI
+# Ntropy Transaction API CLI
 
-> **Warning: Unofficial CLI** - Not officially sponsored or affiliated with Ntropy.
+A production-ready command-line interface for the [ntropy.network](https://ntropy.network) Ntropy Transaction API. Transaction classification, merchant enrichment directly from your terminal.
 
-Command-line interface for the Ntropy financial transaction enrichment API. Enrich transactions with merchant data, labels, and categories directly from your terminal.
+> **Disclaimer**: This is an unofficial CLI tool and is not affiliated with, endorsed by, or supported by ntropy.network.
+
+## Features
+
+- **Consumer Classification** — Classify personal transactions
+- **Business Classification** — Classify business transactions
+- **Batch Processing** — Process multiple transactions at once
+- **Merchant Enrichment** — Get logos, websites, and labels
+- **API Key Auth** — Simple authentication with your Ntropy API key
+- **JSON output** — All commands support `--json` for scripting and piping
+- **Colorized output** — Clean, readable terminal output with chalk
+
+## Why CLI > MCP
+
+MCP servers are complex, stateful, and require a running server process. A CLI is:
+
+- **Simpler** — Just a binary you call directly
+- **Composable** — Pipe output to other tools
+- **Scriptable** — Use in shell scripts, CI/CD pipelines, cron jobs
+- **Debuggable** — See exactly what's happening with `--json` flag
+- **AI-friendly** — AI agents can call CLIs just as easily as MCPs, with less overhead
 
 ## Installation
 
@@ -17,95 +35,47 @@ Command-line interface for the Ntropy financial transaction enrichment API. Enri
 npm install -g @ktmcp-cli/ntropy
 ```
 
-## Setup
+## Authentication Setup
+
+### Configure the CLI
 
 ```bash
-ntropy config set --api-key <your-api-key>
+ntropy config set --api-key YOUR_API_KEY
+# or for token-based:
+ntropy config set --access-token YOUR_ACCESS_TOKEN
 ```
 
-Get your API key at [https://ntropy.network](https://ntropy.network).
-
-## Commands
-
-### Config
+### Verify
 
 ```bash
-ntropy config set --api-key <key>
 ntropy config show
 ```
 
-### Transactions
+## Commands
+
+See help for all available commands:
 
 ```bash
-# Enrich a single transaction
-ntropy transactions enrich \
-  --id tx123 \
-  --description "STARBUCKS #1234" \
-  --amount -5.50 \
-  --date 2024-01-15 \
-  --account-holder-id user_001 \
-  --entry-type debit \
-  --currency USD
-
-# Enrich from JSON file
-ntropy transactions enrich-batch --file transactions.json
-
-# List transactions
-ntropy transactions list
-ntropy transactions list --limit 50
-
-# Get single transaction
-ntropy transactions get <transaction-id>
-```
-
-### Account Holders
-
-```bash
-ntropy accounts create --id user_001 --type consumer --name "John Doe" --currency USD
-ntropy accounts list
-ntropy accounts get <account-id>
-ntropy accounts delete <account-id>
-```
-
-### Reports
-
-```bash
-ntropy reports get <account-id>
-ntropy reports get <account-id> --period 2024-01
-ntropy reports metrics <account-id>
-```
-
-### Labels
-
-```bash
-ntropy labels list
+ntropy --help
+ntropy <command> --help
 ```
 
 ## JSON Output
 
-All commands support `--json` for structured output:
+All commands support `--json` for machine-readable output:
 
 ```bash
-ntropy transactions enrich --id tx1 --description "Amazon" --amount -50 --date 2024-01-01 --account-holder-id u1 --json
-ntropy accounts list --json
+ntropy <command> --json
 ```
 
-## Batch File Format
+## Contributing
 
-```json
-[
-  {
-    "id": "tx001",
-    "description": "STARBUCKS",
-    "amount": -5.50,
-    "date": "2024-01-15",
-    "account_holder_id": "user_001",
-    "entry_type": "debit",
-    "currency": "USD"
-  }
-]
-```
+Issues and pull requests are welcome at [github.com/ktmcp-cli/ntropy](https://github.com/ktmcp-cli/ntropy).
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE) for details.
+
+---
+
+Part of the [KTMCP CLI](https://killthemcp.com) project — replacing MCPs with simple, composable CLIs.
